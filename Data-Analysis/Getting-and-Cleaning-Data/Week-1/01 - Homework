@@ -1,0 +1,59 @@
+
+#QUESTION 1
+#How many housing units in this survey were worth more than $1,000,000?
+ACS = read.csv(url("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv "))
+names(ACS)
+a = subset(ACS, ACS$VAL==24)
+str(a)
+summary(ACS$VAL)
+head(ACS$FES)
+summary(ACS$FES)
+
+#QUESTION 3
+#Read rows 18-23 and columns 7-15 into R and assign the result to a variable called:dat 
+#What is the value of:  sum(dat$Zip*dat$Ext,na.rm=T) ?
+library(xlsx)
+dat = read.xlsx("getdata-data-DATA.gov_NGAP.xlsx", sheetIndex=1,colIndex = 7:15, rowIndex = 18:23)
+sum(dat$Zip*dat$Ext,na.rm=T)
+
+#QUESTION 4
+#Read the XML data on Baltimore restaurants from here: 
+#How many restaurants have zipcode 21231?
+library(XML)
+doc <- xmlTreeParse("getdata-data-restaurants.xml", useInternal = TRUE)
+rootNode <- xmlRoot(doc)
+xmlName(rootNode)
+rootNode[[1]][[1]]
+xmlSApply(rootNode, xmlValue)#Gets all the xml as one bunch of text together
+#Can Use XPath to access different parts
+
+#Get names in xml file
+xpathSApply(rootNode,"//name", xmlValue) #  gets name section at all levels
+zipcodes = xpathSApply(rootNode,"//zipcode", xmlValue)
+str(zipcodes)
+table(zipcodes == 21231 )
+
+
+#QUESTION 5
+#using the fread() command load the data into an R object: DT 
+#Which of the following is the fastest way to calculate the average value
+#of the variable: 'pwgtp15' broken down by sex using the data.table package?
+library(data.table)
+big_df <- read.csv("getdata-data-ss06pid.csv")
+file <- tempfile()
+write.table(big_df, file = file, row.names = FALSE, col.names = TRUE, sep="\t", quote = FALSE)
+DT <- fread(file)
+
+#1 THIS ONE
+system.time(DT[,mean(pwgtp15),by=SEX])
+#2
+system.time(mean(DT$pwgtp15,by=DT$SEX))
+#3
+system.time(sapply(split(DT$pwgtp15,DT$SEX),mean))
+#4
+system.time(mean(DT[DT$SEX==1,]$pwgtp15)); system.time(mean(DT[DT$SEX==2,]$pwgtp15))
+#5
+system.time(tapply(DT$pwgtp15,DT$SEX,mean))
+#6
+system.time(rowMeans(DT)[DT$SEX==1]);system.time(rowMeans(DT)[DT$SEX==2])
+
