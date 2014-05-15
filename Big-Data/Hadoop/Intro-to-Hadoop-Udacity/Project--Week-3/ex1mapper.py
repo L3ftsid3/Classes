@@ -1,4 +1,4 @@
-!/usr/bin/python
+#!/usr/bin/python
 
 #Excercise 1 - The three questions that you have to answer about this data set are:
 # Instead of breaking the sales down by store, instead give us a sales breakdown by product category across all of our stores.
