@@ -26,7 +26,7 @@ For each of the problems, we would like you to write a MapReduce job to solve th
 
 
 
-###### Excercises
+### Excercises
 * Problem Set 1 = Write a MapReduce program which will display the number of hits for each different file on the Web site.
                   (Example: How many hits were made to the page: "/assets/js/the-associates.js")
 * Problem Set 2 = Write a MapReduce program which determines the number of hits to the site made by each different IP address.
