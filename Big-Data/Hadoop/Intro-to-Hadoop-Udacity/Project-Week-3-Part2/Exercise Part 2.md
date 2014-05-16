@@ -6,9 +6,8 @@ The data set we're using is an anonymized Web server log file from a public rela
 
 The logfile is in Common Log Format:
 
-10.223.157.186 - - [15/Jul/2009:15:50:35 -0700] "GET /assets/js/lowpro.js HTTP/1.1" 200 10469
-
-%h %l %u %t \"%r\" %>s %b
+    10.223.157.186 - - [15/Jul/2009:15:50:35 -0700] "GET /assets/js/lowpro.js HTTP/1.1" 200 10469
+    %h %l %u %t \"%r\" %>s %b
 
 Where:
 * %h is the IP address of the client
