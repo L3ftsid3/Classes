@@ -1,0 +1,456 @@
+[training@localhost ~]$ ls
+Desktop    Downloads  Pictures  src               workspace
+Documents  eclipse    Public    udacity_training
+[training@localhost ~]$ cd udacity_training/
+code/ data/ 
+[training@localhost ~]$ cd udacity_training/
+[training@localhost udacity_training]$ cd data/
+[training@localhost data]$ ls
+access_log.gz  purchases.txt
+[training@localhost data]$ hadoop fs -ls
+[training@localhost data]$ hadoop fs -put purchases.txt
+[training@localhost data]$ hadoop fs -ls
+Found 1 items
+-rw-r--r--   1 training supergroup  211312924 2014-05-14 23:22 purchases.txt
+[training@localhost data]$ adoop fs -tail purchases.txt
+bash: adoop: command not found
+[training@localhost data]$ hadoop fs -tail purchases.txt
+31	17:59	Norfolk	Toys	164.34	MasterCard
+2012-12-31	17:59	Chula Vista	Music	380.67	Visa
+2012-12-31	17:59	Hialeah	Toys	115.21	MasterCard
+2012-12-31	17:59	Indianapolis	Men's Clothing	158.28	MasterCard
+2012-12-31	17:59	Norfolk	Garden	414.09	MasterCard
+2012-12-31	17:59	Baltimore	DVDs	467.3	Visa
+2012-12-31	17:59	Santa Ana	Video Games	144.73	Visa
+2012-12-31	17:59	Gilbert	Consumer Electronics	354.66	Discover
+2012-12-31	17:59	Memphis	Sporting Goods	124.79	Amex
+2012-12-31	17:59	Chicago	Men's Clothing	386.54	MasterCard
+2012-12-31	17:59	Birmingham	CDs	118.04	Cash
+2012-12-31	17:59	Las Vegas	Health and Beauty	420.46	Amex
+2012-12-31	17:59	Wichita	Toys	383.9	Cash
+2012-12-31	17:59	Tucson	Pet Supplies	268.39	MasterCard
+2012-12-31	17:59	Glendale	Women's Clothing	68.05	Amex
+2012-12-31	17:59	Albuquerque	Toys	345.7	MasterCard
+2012-12-31	17:59	Rochester	DVDs	399.57	Amex
+2012-12-31	17:59	Greensboro	Baby	277.27	Discover
+2012-12-31	17:59	Arlington	Women's Clothing	134.95	MasterCard
+2012-12-31	17:59	Corpus Christi	DVDs	441.61	Discover
+[training@localhost data]$ hadoop fs -mv purchases.txt newname.txt
+[training@localhost data]$ hadoop fs -ls
+Found 1 items
+-rw-r--r--   1 training supergroup  211312924 2014-05-14 23:22 newname.txt
+[training@localhost data]$ hadoop fs -rm newname.txt
+Deleted newname.txt
+[training@localhost data]$ hadoop fs -mkdir myinput
+[training@localhost data]$ hadoop fs -put purchases.txt myinput
+[training@localhost data]$ hadoop fs -ls
+Found 1 items
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:25 myinput
+[training@localhost data]$ hadoop fs -ls myinput
+Found 1 items
+-rw-r--r--   1 training supergroup  211312924 2014-05-14 23:25 myinput/purchases.txt
+[training@localhost data]$ cd ..
+[training@localhost udacity_training]$ cd code/
+[training@localhost code]$ ls
+mapper.py  reducer.py
+[training@localhost code]$ hadoop fs -ls
+Found 1 items
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:25 myinput
+[training@localhost code]$ hadoop fs -ls myinput
+Found 1 items
+-rw-r--r--   1 training supergroup  211312924 2014-05-14 23:25 myinput/purchases.txt
+[training@localhost code]$ ls
+mapper.py  reducer.py
+[training@localhost code]$ hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper mapper.py -reducer reducer.py -file mapper.py -file reducer.py -input myinput -output joboutput
+packageJobJar: [mapper.py, reducer.py, /tmp/hadoop-training/hadoop-unjar3288506755030895561/] [] /tmp/streamjob4451074630670334680.jar tmpDir=null
+14/05/14 23:50:35 WARN mapred.JobClient: Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same.
+14/05/14 23:50:37 WARN snappy.LoadSnappy: Snappy native library is available
+14/05/14 23:50:37 INFO snappy.LoadSnappy: Snappy native library loaded
+14/05/14 23:50:37 INFO mapred.FileInputFormat: Total input paths to process : 1
+14/05/14 23:50:39 INFO streaming.StreamJob: getLocalDirs(): [/var/lib/hadoop-hdfs/cache/training/mapred/local]
+14/05/14 23:50:39 INFO streaming.StreamJob: Running job: job_201405142313_0001
+14/05/14 23:50:39 INFO streaming.StreamJob: To kill this job, run:
+14/05/14 23:50:39 INFO streaming.StreamJob: UNDEF/bin/hadoop job  -Dmapred.job.tracker=0.0.0.0:8021 -kill job_201405142313_0001
+14/05/14 23:50:39 INFO streaming.StreamJob: Tracking URL: http://0.0.0.0:50030/jobdetails.jsp?jobid=job_201405142313_0001
+14/05/14 23:50:40 INFO streaming.StreamJob:  map 0%  reduce 0%
+14/05/14 23:51:26 INFO streaming.StreamJob:  map 1%  reduce 0%
+14/05/14 23:51:30 INFO streaming.StreamJob:  map 3%  reduce 0%
+14/05/14 23:51:34 INFO streaming.StreamJob:  map 4%  reduce 0%
+14/05/14 23:51:37 INFO streaming.StreamJob:  map 5%  reduce 0%
+14/05/14 23:51:40 INFO streaming.StreamJob:  map 6%  reduce 0%
+14/05/14 23:51:43 INFO streaming.StreamJob:  map 7%  reduce 0%
+14/05/14 23:51:47 INFO streaming.StreamJob:  map 8%  reduce 0%
+14/05/14 23:51:50 INFO streaming.StreamJob:  map 10%  reduce 0%
+14/05/14 23:51:54 INFO streaming.StreamJob:  map 11%  reduce 0%
+14/05/14 23:51:57 INFO streaming.StreamJob:  map 12%  reduce 0%
+14/05/14 23:52:00 INFO streaming.StreamJob:  map 13%  reduce 0%
+14/05/14 23:52:03 INFO streaming.StreamJob:  map 14%  reduce 0%
+14/05/14 23:52:07 INFO streaming.StreamJob:  map 15%  reduce 0%
+14/05/14 23:52:10 INFO streaming.StreamJob:  map 17%  reduce 0%
+14/05/14 23:52:14 INFO streaming.StreamJob:  map 18%  reduce 0%
+14/05/14 23:52:17 INFO streaming.StreamJob:  map 19%  reduce 0%
+14/05/14 23:52:20 INFO streaming.StreamJob:  map 20%  reduce 0%
+14/05/14 23:52:24 INFO streaming.StreamJob:  map 21%  reduce 0%
+14/05/14 23:52:27 INFO streaming.StreamJob:  map 22%  reduce 0%
+14/05/14 23:52:30 INFO streaming.StreamJob:  map 23%  reduce 0%
+14/05/14 23:52:35 INFO streaming.StreamJob:  map 24%  reduce 0%
+14/05/14 23:52:38 INFO streaming.StreamJob:  map 25%  reduce 0%
+14/05/14 23:52:41 INFO streaming.StreamJob:  map 26%  reduce 0%
+14/05/14 23:52:44 INFO streaming.StreamJob:  map 27%  reduce 0%
+14/05/14 23:52:47 INFO streaming.StreamJob:  map 28%  reduce 0%
+14/05/14 23:52:48 INFO streaming.StreamJob:  map 29%  reduce 0%
+14/05/14 23:52:51 INFO streaming.StreamJob:  map 30%  reduce 0%
+14/05/14 23:52:54 INFO streaming.StreamJob:  map 31%  reduce 0%
+14/05/14 23:53:00 INFO streaming.StreamJob:  map 32%  reduce 0%
+14/05/14 23:53:01 INFO streaming.StreamJob:  map 33%  reduce 0%
+14/05/14 23:53:04 INFO streaming.StreamJob:  map 34%  reduce 0%
+14/05/14 23:53:08 INFO streaming.StreamJob:  map 35%  reduce 0%
+14/05/14 23:53:11 INFO streaming.StreamJob:  map 36%  reduce 0%
+14/05/14 23:53:13 INFO streaming.StreamJob:  map 37%  reduce 0%
+14/05/14 23:53:17 INFO streaming.StreamJob:  map 38%  reduce 0%
+14/05/14 23:53:20 INFO streaming.StreamJob:  map 40%  reduce 0%
+14/05/14 23:53:24 INFO streaming.StreamJob:  map 41%  reduce 0%
+14/05/14 23:53:30 INFO streaming.StreamJob:  map 42%  reduce 0%
+14/05/14 23:53:33 INFO streaming.StreamJob:  map 43%  reduce 0%
+14/05/14 23:53:36 INFO streaming.StreamJob:  map 44%  reduce 0%
+14/05/14 23:53:40 INFO streaming.StreamJob:  map 45%  reduce 0%
+14/05/14 23:53:44 INFO streaming.StreamJob:  map 47%  reduce 0%
+14/05/14 23:53:48 INFO streaming.StreamJob:  map 48%  reduce 0%
+14/05/14 23:53:51 INFO streaming.StreamJob:  map 49%  reduce 0%
+14/05/14 23:53:55 INFO streaming.StreamJob:  map 50%  reduce 0%
+14/05/14 23:54:47 INFO streaming.StreamJob:  map 50%  reduce 8%
+14/05/14 23:54:49 INFO streaming.StreamJob:  map 51%  reduce 8%
+14/05/14 23:54:50 INFO streaming.StreamJob:  map 56%  reduce 17%
+14/05/14 23:54:53 INFO streaming.StreamJob:  map 60%  reduce 17%
+14/05/14 23:54:56 INFO streaming.StreamJob:  map 61%  reduce 17%
+14/05/14 23:54:57 INFO streaming.StreamJob:  map 65%  reduce 17%
+14/05/14 23:55:00 INFO streaming.StreamJob:  map 68%  reduce 17%
+14/05/14 23:55:03 INFO streaming.StreamJob:  map 71%  reduce 17%
+14/05/14 23:55:06 INFO streaming.StreamJob:  map 72%  reduce 17%
+14/05/14 23:55:07 INFO streaming.StreamJob:  map 76%  reduce 17%
+14/05/14 23:55:10 INFO streaming.StreamJob:  map 79%  reduce 17%
+14/05/14 23:55:15 INFO streaming.StreamJob:  map 80%  reduce 17%
+14/05/14 23:55:17 INFO streaming.StreamJob:  map 80%  reduce 25%
+14/05/14 23:55:18 INFO streaming.StreamJob:  map 81%  reduce 25%
+14/05/14 23:55:21 INFO streaming.StreamJob:  map 82%  reduce 25%
+14/05/14 23:55:24 INFO streaming.StreamJob:  map 83%  reduce 25%
+14/05/14 23:55:28 INFO streaming.StreamJob:  map 84%  reduce 25%
+14/05/14 23:55:31 INFO streaming.StreamJob:  map 85%  reduce 25%
+14/05/14 23:55:34 INFO streaming.StreamJob:  map 87%  reduce 25%
+14/05/14 23:55:38 INFO streaming.StreamJob:  map 88%  reduce 25%
+14/05/14 23:55:44 INFO streaming.StreamJob:  map 90%  reduce 25%
+14/05/14 23:55:48 INFO streaming.StreamJob:  map 91%  reduce 25%
+14/05/14 23:55:51 INFO streaming.StreamJob:  map 92%  reduce 25%
+14/05/14 23:55:54 INFO streaming.StreamJob:  map 93%  reduce 25%
+14/05/14 23:55:57 INFO streaming.StreamJob:  map 94%  reduce 25%
+14/05/14 23:56:00 INFO streaming.StreamJob:  map 95%  reduce 25%
+14/05/14 23:56:03 INFO streaming.StreamJob:  map 96%  reduce 25%
+14/05/14 23:56:06 INFO streaming.StreamJob:  map 98%  reduce 25%
+14/05/14 23:56:09 INFO streaming.StreamJob:  map 99%  reduce 25%
+14/05/14 23:56:12 INFO streaming.StreamJob:  map 100%  reduce 25%
+14/05/14 23:56:20 INFO streaming.StreamJob:  map 100%  reduce 33%
+14/05/14 23:56:27 INFO streaming.StreamJob:  map 100%  reduce 68%
+14/05/14 23:56:30 INFO streaming.StreamJob:  map 100%  reduce 70%
+14/05/14 23:56:33 INFO streaming.StreamJob:  map 100%  reduce 73%
+14/05/14 23:56:36 INFO streaming.StreamJob:  map 100%  reduce 76%
+14/05/14 23:56:39 INFO streaming.StreamJob:  map 100%  reduce 79%
+14/05/14 23:56:42 INFO streaming.StreamJob:  map 100%  reduce 82%
+14/05/14 23:56:45 INFO streaming.StreamJob:  map 100%  reduce 85%
+14/05/14 23:56:48 INFO streaming.StreamJob:  map 100%  reduce 88%
+14/05/14 23:56:52 INFO streaming.StreamJob:  map 100%  reduce 90%
+14/05/14 23:56:56 INFO streaming.StreamJob:  map 100%  reduce 91%
+14/05/14 23:56:59 INFO streaming.StreamJob:  map 100%  reduce 94%
+14/05/14 23:57:02 INFO streaming.StreamJob:  map 100%  reduce 96%
+14/05/14 23:57:05 INFO streaming.StreamJob:  map 100%  reduce 99%
+14/05/14 23:57:08 INFO streaming.StreamJob:  map 100%  reduce 100%
+14/05/14 23:57:16 INFO streaming.StreamJob: Job complete: job_201405142313_0001
+14/05/14 23:57:16 INFO streaming.StreamJob: Output: joboutput
+[training@localhost code]$ hadoop fs -ls
+Found 2 items
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:57 joboutput
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:25 myinput
+[training@localhost code]$ hadoop fs -ls joboutput
+Found 3 items
+-rw-r--r--   1 training supergroup          0 2014-05-14 23:57 joboutput/_SUCCESS
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:50 joboutput/_logs
+-rw-r--r--   1 training supergroup       2296 2014-05-14 23:57 joboutput/part-00000
+[training@localhost code]$ hadoop fs -cat part-0000 | less 
+[training@localhost code]$ hadoop fs -cat part-00 | less 
+[training@localhost code]$ hadoop fs -cat joboutput/part-00 | less 
+[training@localhost code]$ hadoop -fs -get joboutput/part-00 mylocalfile.txt
+Error: No command named `-fs' was found. Perhaps you meant `hadoop fs'
+[training@localhost code]$ hadoop fs -get joboutput/part-00 mylocalfile.txt
+get: `joboutput/part-00': No such file or directory
+[training@localhost code]$ hadoop fs -get joboutput/part-00 mylocalfile.txt
+get: `joboutput/part-00': No such file or directory
+[training@localhost code]$ hadoop fs -cat joboutput/part-00 | less 
+[training@localhost code]$ hadoop fs -ls joboutput
+Found 3 items
+-rw-r--r--   1 training supergroup          0 2014-05-14 23:57 joboutput/_SUCCESS
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:50 joboutput/_logs
+-rw-r--r--   1 training supergroup       2296 2014-05-14 23:57 joboutput/part-00000
+[training@localhost code]$ hadoop fs -cat joboutput/part-00000 | less
+[training@localhost code]$ hadoop fs -get joboutput/part-00000 mylocalfile.txt
+[training@localhost code]$ ls
+mapper.py  mylocalfile.txt  reducer.py
+[training@localhost code]$ less mylocalfile.txt
+[training@localhost code]$ hs mapper.py reducer.py myinput joboutput
+packageJobJar: [mapper.py, reducer.py, /tmp/hadoop-training/hadoop-unjar2099511789752100848/] [] /tmp/streamjob8782412631879459732.jar tmpDir=null
+14/05/15 00:09:33 WARN mapred.JobClient: Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same.
+14/05/15 00:09:35 INFO mapred.JobClient: Cleaning up the staging area hdfs://0.0.0.0:8020/var/lib/hadoop-hdfs/cache/mapred/mapred/staging/training/.staging/job_201405142313_0002
+14/05/15 00:09:35 ERROR security.UserGroupInformation: PriviledgedActionException as:training (auth:SIMPLE) cause:org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://0.0.0.0:8020/user/training/joboutput already exists
+14/05/15 00:09:35 ERROR streaming.StreamJob: Error launching job , Output path already exists : Output directory hdfs://0.0.0.0:8020/user/training/joboutput already exists
+Streaming Command Failed!
+[training@localhost code]$ ls
+mapper.py  mylocalfile.txt  reducer.py
+[training@localhost code]$ ./mapper.py
+field1	f2	f3	f4	f5	f6
+fieldA	fB	fC	fD	fE	fFf3	f5
+fC	fE
+[training@localhost code]$ ./mapper.py
+field1  f2	f3	f4	f5	f6
+fieldA	fB	fC	fD	fE	fF
+f3	f5
+fC	fE
+
+q
+cd .. 
+[training@localhost code]$ ls ../data
+access_log.gz  purchases.txt
+[training@localhost code]$ head -50 ../data/purchases.txt > textfile
+[training@localhost code]$ cat testfile | ./mapper.py
+cat: testfile: No such file or directory
+[training@localhost code]$ head -50 ../data/purchases.txt > testfile
+[training@localhost code]$ cat testfile | ./mapper.py
+San Jose	214.05
+Fort Worth	153.57
+San Diego	66.08
+Pittsburgh	493.51
+Omaha	235.63
+Stockton	247.18
+Austin	379.6
+New York	296.8
+Corpus Christi	25.38
+Fort Worth	213.88
+Las Vegas	53.26
+Newark	39.75
+Austin	469.63
+Greensboro	290.82
+San Francisco	260.65
+Lincoln	136.9
+Buffalo	483.82
+San Jose	215.82
+Boston	418.94
+Houston	309.16
+Las Vegas	93.39
+Virginia Beach	376.11
+Riverside	252.88
+Tulsa	205.06
+Reno	88.25
+Chicago	31.08
+Fort Wayne	370.55
+San Bernardino	170.2
+Madison	16.78
+Austin	327.75
+Portland	108.69
+Riverside	15.41
+Reno	80.46
+Anchorage	298.86
+Pittsburgh	475.26
+Spokane	3.85
+Spokane	287.65
+Fresno	466.64
+Omaha	255.68
+Anchorage	6.38
+Aurora	117.81
+Philadelphia	351.31
+Fremont	222.61
+Anchorage	22.36
+Norfolk	189.01
+Chandler	414.08
+Minneapolis	182.05
+Honolulu	345.18
+Indianapolis	135.96
+Chandler	344.09
+[training@localhost code]$ cat testfile | ./mapper.py | sort |  ./reduce.py
+bash: ./reduce.py: No such file or directory
+[training@localhost code]$ cat testfile | ./mapper.py | sort |  ./reducer.py
+Anchorage 	327.6
+Aurora 	117.81
+Austin 	1176.98
+Boston 	418.94
+Buffalo 	483.82
+Chandler 	758.17
+Chicago 	31.08
+Corpus Christi 	25.38
+Fort Wayne 	370.55
+Fort Worth 	367.45
+Fremont 	222.61
+Fresno 	466.64
+Greensboro 	290.82
+Honolulu 	345.18
+Houston 	309.16
+Indianapolis 	135.96
+Las Vegas 	146.65
+Lincoln 	136.9
+Madison 	16.78
+Minneapolis 	182.05
+Newark 	39.75
+New York 	296.8
+Norfolk 	189.01
+Omaha 	491.31
+Philadelphia 	351.31
+Pittsburgh 	968.77
+Portland 	108.69
+Reno 	168.71
+Riverside 	268.29
+San Bernardino 	170.2
+San Diego 	66.08
+San Francisco 	260.65
+San Jose 	429.87
+Spokane 	291.5
+Stockton 	247.18
+Tulsa 	205.06
+Virginia Beach 	376.11
+[training@localhost code]$ hs mapper.py reducer.py myinput output2
+packageJobJar: [mapper.py, reducer.py, /tmp/hadoop-training/hadoop-unjar8882684164542039564/] [] /tmp/streamjob4640923671312977904.jar tmpDir=null
+14/05/15 01:09:01 WARN mapred.JobClient: Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same.
+14/05/15 01:09:02 WARN snappy.LoadSnappy: Snappy native library is available
+14/05/15 01:09:02 INFO snappy.LoadSnappy: Snappy native library loaded
+14/05/15 01:09:02 INFO mapred.FileInputFormat: Total input paths to process : 1
+14/05/15 01:09:04 INFO streaming.StreamJob: getLocalDirs(): [/var/lib/hadoop-hdfs/cache/training/mapred/local]
+14/05/15 01:09:04 INFO streaming.StreamJob: Running job: job_201405142313_0003
+14/05/15 01:09:04 INFO streaming.StreamJob: To kill this job, run:
+14/05/15 01:09:04 INFO streaming.StreamJob: UNDEF/bin/hadoop job  -Dmapred.job.tracker=0.0.0.0:8021 -kill job_201405142313_0003
+14/05/15 01:09:04 INFO streaming.StreamJob: Tracking URL: http://0.0.0.0:50030/jobdetails.jsp?jobid=job_201405142313_0003
+14/05/15 01:09:05 INFO streaming.StreamJob:  map 0%  reduce 0%
+14/05/15 01:09:58 INFO streaming.StreamJob:  map 1%  reduce 0%
+14/05/15 01:10:02 INFO streaming.StreamJob:  map 3%  reduce 0%
+14/05/15 01:10:05 INFO streaming.StreamJob:  map 4%  reduce 0%
+14/05/15 01:10:08 INFO streaming.StreamJob:  map 6%  reduce 0%
+14/05/15 01:10:11 INFO streaming.StreamJob:  map 7%  reduce 0%
+14/05/15 01:10:15 INFO streaming.StreamJob:  map 8%  reduce 0%
+14/05/15 01:10:18 INFO streaming.StreamJob:  map 10%  reduce 0%
+14/05/15 01:10:21 INFO streaming.StreamJob:  map 11%  reduce 0%
+14/05/15 01:10:25 INFO streaming.StreamJob:  map 12%  reduce 0%
+14/05/15 01:10:28 INFO streaming.StreamJob:  map 13%  reduce 0%
+14/05/15 01:10:32 INFO streaming.StreamJob:  map 14%  reduce 0%
+14/05/15 01:10:35 INFO streaming.StreamJob:  map 15%  reduce 0%
+14/05/15 01:10:38 INFO streaming.StreamJob:  map 17%  reduce 0%
+14/05/15 01:10:46 INFO streaming.StreamJob:  map 19%  reduce 0%
+14/05/15 01:10:49 INFO streaming.StreamJob:  map 20%  reduce 0%
+14/05/15 01:11:00 INFO streaming.StreamJob:  map 21%  reduce 0%
+14/05/15 01:11:03 INFO streaming.StreamJob:  map 22%  reduce 0%
+14/05/15 01:11:06 INFO streaming.StreamJob:  map 23%  reduce 0%
+14/05/15 01:11:10 INFO streaming.StreamJob:  map 24%  reduce 0%
+14/05/15 01:11:13 INFO streaming.StreamJob:  map 25%  reduce 0%
+14/05/15 01:11:16 INFO streaming.StreamJob:  map 26%  reduce 0%
+14/05/15 01:11:20 INFO streaming.StreamJob:  map 27%  reduce 0%
+14/05/15 01:11:24 INFO streaming.StreamJob:  map 29%  reduce 0%
+14/05/15 01:11:27 INFO streaming.StreamJob:  map 30%  reduce 0%
+14/05/15 01:11:31 INFO streaming.StreamJob:  map 31%  reduce 0%
+14/05/15 01:11:37 INFO streaming.StreamJob:  map 32%  reduce 0%
+14/05/15 01:11:41 INFO streaming.StreamJob:  map 33%  reduce 0%
+14/05/15 01:11:47 INFO streaming.StreamJob:  map 34%  reduce 0%
+14/05/15 01:11:48 INFO streaming.StreamJob:  map 35%  reduce 0%
+14/05/15 01:11:51 INFO streaming.StreamJob:  map 36%  reduce 0%
+14/05/15 01:11:54 INFO streaming.StreamJob:  map 37%  reduce 0%
+14/05/15 01:11:58 INFO streaming.StreamJob:  map 38%  reduce 0%
+14/05/15 01:12:01 INFO streaming.StreamJob:  map 39%  reduce 0%
+14/05/15 01:12:04 INFO streaming.StreamJob:  map 40%  reduce 0%
+14/05/15 01:12:08 INFO streaming.StreamJob:  map 41%  reduce 0%
+14/05/15 01:12:15 INFO streaming.StreamJob:  map 42%  reduce 0%
+14/05/15 01:12:23 INFO streaming.StreamJob:  map 43%  reduce 0%
+14/05/15 01:12:26 INFO streaming.StreamJob:  map 45%  reduce 0%
+14/05/15 01:12:29 INFO streaming.StreamJob:  map 46%  reduce 0%
+14/05/15 01:12:32 INFO streaming.StreamJob:  map 47%  reduce 0%
+14/05/15 01:12:36 INFO streaming.StreamJob:  map 48%  reduce 0%
+14/05/15 01:12:39 INFO streaming.StreamJob:  map 49%  reduce 0%
+14/05/15 01:12:42 INFO streaming.StreamJob:  map 50%  reduce 0%
+14/05/15 01:13:45 INFO streaming.StreamJob:  map 50%  reduce 8%
+14/05/15 01:13:47 INFO streaming.StreamJob:  map 51%  reduce 8%
+14/05/15 01:13:48 INFO streaming.StreamJob:  map 51%  reduce 17%
+14/05/15 01:13:51 INFO streaming.StreamJob:  map 58%  reduce 17%
+14/05/15 01:13:54 INFO streaming.StreamJob:  map 62%  reduce 17%
+14/05/15 01:13:57 INFO streaming.StreamJob:  map 66%  reduce 17%
+14/05/15 01:14:00 INFO streaming.StreamJob:  map 67%  reduce 17%
+14/05/15 01:14:01 INFO streaming.StreamJob:  map 70%  reduce 17%
+14/05/15 01:14:03 INFO streaming.StreamJob:  map 71%  reduce 17%
+14/05/15 01:14:04 INFO streaming.StreamJob:  map 74%  reduce 17%
+14/05/15 01:14:07 INFO streaming.StreamJob:  map 77%  reduce 17%
+14/05/15 01:14:10 INFO streaming.StreamJob:  map 80%  reduce 17%
+14/05/15 01:14:15 INFO streaming.StreamJob:  map 80%  reduce 25%
+14/05/15 01:14:16 INFO streaming.StreamJob:  map 82%  reduce 25%
+14/05/15 01:14:19 INFO streaming.StreamJob:  map 83%  reduce 25%
+14/05/15 01:14:22 INFO streaming.StreamJob:  map 84%  reduce 25%
+14/05/15 01:14:26 INFO streaming.StreamJob:  map 85%  reduce 25%
+14/05/15 01:14:29 INFO streaming.StreamJob:  map 86%  reduce 25%
+14/05/15 01:14:32 INFO streaming.StreamJob:  map 88%  reduce 25%
+14/05/15 01:14:35 INFO streaming.StreamJob:  map 89%  reduce 25%
+14/05/15 01:14:43 INFO streaming.StreamJob:  map 90%  reduce 25%
+14/05/15 01:14:46 INFO streaming.StreamJob:  map 91%  reduce 25%
+14/05/15 01:14:49 INFO streaming.StreamJob:  map 93%  reduce 25%
+14/05/15 01:14:52 INFO streaming.StreamJob:  map 94%  reduce 25%
+14/05/15 01:14:55 INFO streaming.StreamJob:  map 95%  reduce 25%
+14/05/15 01:14:58 INFO streaming.StreamJob:  map 96%  reduce 25%
+14/05/15 01:15:01 INFO streaming.StreamJob:  map 97%  reduce 25%
+14/05/15 01:15:04 INFO streaming.StreamJob:  map 98%  reduce 25%
+14/05/15 01:15:08 INFO streaming.StreamJob:  map 99%  reduce 25%
+14/05/15 01:15:11 INFO streaming.StreamJob:  map 100%  reduce 25%
+14/05/15 01:15:17 INFO streaming.StreamJob:  map 100%  reduce 33%
+14/05/15 01:15:20 INFO streaming.StreamJob:  map 100%  reduce 67%
+14/05/15 01:15:23 INFO streaming.StreamJob:  map 100%  reduce 69%
+14/05/15 01:15:27 INFO streaming.StreamJob:  map 100%  reduce 72%
+14/05/15 01:15:30 INFO streaming.StreamJob:  map 100%  reduce 76%
+14/05/15 01:15:33 INFO streaming.StreamJob:  map 100%  reduce 79%
+14/05/15 01:15:36 INFO streaming.StreamJob:  map 100%  reduce 82%
+14/05/15 01:15:39 INFO streaming.StreamJob:  map 100%  reduce 85%
+14/05/15 01:15:42 INFO streaming.StreamJob:  map 100%  reduce 88%
+14/05/15 01:15:46 INFO streaming.StreamJob:  map 100%  reduce 91%
+14/05/15 01:15:50 INFO streaming.StreamJob:  map 100%  reduce 96%
+14/05/15 01:15:53 INFO streaming.StreamJob:  map 100%  reduce 100%
+14/05/15 01:16:01 INFO streaming.StreamJob: Job complete: job_201405142313_0003
+14/05/15 01:16:01 INFO streaming.StreamJob: Output: output2
+[training@localhost code]$ ls
+mapper.py  mylocalfile.txt  reducer.py  testfile  textfile
+[training@localhost code]$ touch mapper2.py
+[training@localhost code]$ touch reducer2.py
+[training@localhost code]$ mapper.py
+bash: mapper.py: command not found
+[training@localhost code]$ mapper2.py | less
+bash: mapper2.py: command not found
+[training@localhost code]$ edit mapper2.py
+bash: edit: command not found
+[training@localhost code]$ pico mapper2.py
+bash: pico: command not found
+[training@localhost code]$ nano mapper2.py
+[training@localhost code]$ nano mapper.py
+[training@localhost code]$ nano mapper2.py
+[training@localhost code]$ ls
+mapper2.py  mapper.py  mylocalfile.txt  reducer2.py  reducer.py  testfile  textfile
+[training@localhost code]$ head mylocalfile.txt
+Albuquerque 	10052311.42
+Anaheim 	10076416.36
+Anchorage 	9933500.4
+Arlington 	10072207.97
+Atlanta 	9997146.7
+Aurora 	9992970.92
+Austin 	10057158.9
+Bakersfield 	10031208.92
+Baltimore 	10096521.45
+Baton Rouge 	10131273.23
+[training@localhost code]$ cd ..
+[training@localhost udacity_training]$ ls
+code  data
+[training@localhost udacity_training]$ cd data
+[training@localhost data]$ ls
+access_log.gz  purchases.txt
+[training@localhost data]$ hadoop fs -ls
+Found 3 items
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:57 joboutput
+drwxr-xr-x   - training supergroup          0 2014-05-14 23:25 myinput
+drwxr-xr-x   - training supergroup          0 2014-05-15 01:16 output2
+[training@localhost data]$ hadoop fs -ls myinput
+Found 1 items
+-rw-r--r--   1 training supergroup  211312924 2014-05-14 23:25 myinput/purchases.txt
+[training@localhost data]$ 
