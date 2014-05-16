@@ -23,3 +23,16 @@ The data set we're using is an anonymized Web server log file from a public rela
  
 
 For each of the problems, we would like you to write a MapReduce job to solve the problem and when you have done that you should be able to answer the question we are going to ask you.
+
+
+
+###### Excercises
+* Problem Set 1 = Write a MapReduce program which will display the number of hits for each different file on the Web site.
+                  (Example: How many hits were made to the page: "/assets/js/the-associates.js")
+* Problem Set 2 = Write a MapReduce program which determines the number of hits to the site made by each different IP address.
+                  (Example: How many hits were made by the IP address: "10.99.99.186")
+* Problem Set 3 = Find the most popular file on the Web site. In other words, the file which had the most hit. Your Reducer                       should just write out the name of the file and the number of hits into HDFS.
+                  (Example: Full path to the most popular file, Number of hits to that file)
+
+
+
