@@ -4,7 +4,7 @@ We've talked about how Hadoop works, you've seen Hadoop code, and you've written
 
 The data set we're using is an anonymized Web server log file from a public relations company whose clients were DVD distributors. The log file is in the udacity_training/data directory, and it's currently compressed using GnuZip. So you'll need to decompress it and then put it in HDFS. If you take a look at the file, you'll see that each line represents a hit to the Web server. It includes the IP address which accessed the site, the date and time of the access, and the name of the page which was visited.
 
-The logfile is in Common Log Format:
+######The logfile is in Common Log Format:
 
     10.223.157.186 - - [15/Jul/2009:15:50:35 -0700] "GET /assets/js/lowpro.js HTTP/1.1" 200 10469
     %h %l %u %t \"%r\" %>s %b
