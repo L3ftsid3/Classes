@@ -1,1 +1,63 @@
-hadoop fs -ls
+[training@localhost data]$ hadoop fs -ls
+[training@localhost data]$ hadoop fs -put purchases.txt
+[training@localhost data]$ hadoop fs -ls
+Found 1 items
+-rw-r--r--   1 training supergroup  211312924 2014-05-14 23:22 purchases.txt
+[training@localhost data]$ hadoop fs -tail purchases.txt
+[training@localhost data]$ hadoop fs -mv purchases.txt newname.txt
+[training@localhost data]$ hadoop fs -rm newname.txt
+[training@localhost data]$ hadoop fs -mkdir myinput
+[training@localhost data]$ hadoop fs -put purchases.txt myinput
+[training@localhost data]$ hadoop fs -ls myinput
+
+[training@localhost code]$ hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper mapper.py -reducer reducer.py -file mapper.py -file reducer.py -input myinput -output joboutput
+
+[training@localhost code]$ hadoop fs -ls joboutput
+
+
+[training@localhost code]$ hadoop fs -cat joboutput/part-00000 | less
+[training@localhost code]$ hadoop fs -get joboutput/part-00000 mylocalfile.txt
+[training@localhost code]$ less mylocalfile.txt
+
+[training@localhost code]$ hs mapper.py reducer.py myinput joboutput
+
+[training@localhost code]$ ./mapper.py
+field1  f2	f3	f4	f5	f6
+fieldA	fB	fC	fD	fE	fF
+f3	f5
+fC	fE
+
+ 
+[training@localhost code]$ ls ../data
+access_log.gz  purchases.txt
+[training@localhost code]$ head -50 ../data/purchases.txt > testfile
+[training@localhost code]$ cat testfile | ./mapper.py
+
+[training@localhost code]$ cat testfile | ./mapper.py | sort |  ./reducer.py
+
+[training@localhost code]$ hs mapper.py reducer.py myinput output2
+
+[training@localhost code]$ touch mapper2.py
+[training@localhost code]$ touch reducer2.py
+
+[training@localhost code]$ nano mapper2.py
+
+
+- sales breakdown by product category across all of our stores
+- Find monetary value for the highest individual sale for each separate store
+- Find the total sales value across al the stores, and the toal number of sales. Assume there is only one reducer. 
+
+Date /t time /t City /t Product /t Transaction Amt. /t Payment Method
+
+2012-01-01	09:00	San Jose	Men's Clothing	214.05	Amex
+2012-01-01	09:00	Fort Worth	Women's Clothing	153.57	Visa
+2012-01-01	09:00	San Diego	Music	66.08	Cash
+2012-01-01	09:00	Pittsburgh	Pet Supplies	493.51	Discover
+2012-01-01	09:00	Omaha	Children's Clothing	235.63	MasterCard
+2012-01-01	09:00	Stockton	Men's Clothing	247.18	MasterCard
+2012-01-01	09:00	Austin	Cameras	379.6	Visa
+2012-01-01	09:00	New York	Consumer Electronics	296.8	Cash
+2012-01-01	09:00	Corpus Christi	Toys	25.38	Discover
+2012-01-01	09:00	Fort Worth	Toys	213.88	Visa
+
+
