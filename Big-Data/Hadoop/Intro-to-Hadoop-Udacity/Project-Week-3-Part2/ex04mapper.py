@@ -9,6 +9,19 @@
 # The request path is extracted from the request. Since we need hits the value will be 1 [KEY: request_path , VALUE: 1]
 # We need to write them out to standard output, separated by a tab
  
+ 
+# To better split a log
+#p = re.compile(
+#    '([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'
+#    )
+
+#for line in file.readlines():
+#    m = p.match(line)
+#    if not m:
+#        continue
+#    host, ignore, user, date, request, status, size = m.groups()
+
+
 import sys
 req_path_array = []
  
