@@ -25,11 +25,13 @@ for line in sys.stdin:
         oldKey = thisKey
  
     if oldKey != thisKey:
-        print oldKey, "\t", Hits
+        if oldKey == "/assets/js/the-associates.js"
+            print oldKey, "\t", Hits
         oldKey = thisKey;
         Hits = 0
  
     Hits += thisHits
  
 if oldKey != None:
-    print oldKey, "\t", Hits
+    if oldKey == "/assets/js/the-associates.js"
+        print oldKey, "\t", Hits
