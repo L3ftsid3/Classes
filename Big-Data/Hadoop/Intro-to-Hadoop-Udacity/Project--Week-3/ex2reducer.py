@@ -23,17 +23,16 @@ for line in sys.stdin:
     # When key has just been changed (From Miami to NYC stores)
     if oldKey and oldKey != thisKey:
         # print result from oldKey (previous store)
-        print oldKey, "\t", salesTotal
+        print"{0}\t{1}".format(oldKey, maxSale)
         # Change the key to the new store
         oldKey = thisKey
         #Reset maxSale value for the new store to compute new max
         maxSale = 0
         
-    if oldKey == None:
-        oldKey = thisKey
+    oldKey = thisKey
         
-    if thisSale > maxSale:
-        maxSale = thisSale
+    if float(thisSale) > float(maxSale):
+        maxSale = float(thisSale)
     
 if oldKey != None:
     print oldKey, "\t", maxSale
