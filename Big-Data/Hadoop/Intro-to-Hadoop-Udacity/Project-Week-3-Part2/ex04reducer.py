@@ -7,10 +7,9 @@ oldKey = None
  
 # Loop around the data
 # It will be in the format key\tval
-# Where key is the store name, val is the sale amount
+# Where key is the request path name, val is the amount of hits from the mapper
 #
-# All the sales for a particular store will be presented,
-# then the key will change and we'll be dealing with the next store
+# In this case we'll print out only the request path: "/assets/js/the-associates.js"
  
 for line in sys.stdin:
     data_mapped = line.strip().split("\t")
