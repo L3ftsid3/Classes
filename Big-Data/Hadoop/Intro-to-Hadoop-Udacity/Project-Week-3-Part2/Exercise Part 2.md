@@ -11,7 +11,8 @@ The logfile is in Common Log Format:
 %h %l %u %t \"%r\" %>s %b
 
 Where:
-    * %h is the IP address of the client
+
+    *%h is the IP address of the client
     *%l is identity of the client, or "-" if it's unavailable
     *%u is username of the client, or "-" if it's unavailable
     *%t is the time that the server finished processing the request. The format is [day/month/year:hour:minute:second zone]
