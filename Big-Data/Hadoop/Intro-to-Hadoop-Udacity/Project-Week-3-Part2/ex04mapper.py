@@ -11,14 +11,14 @@
  
  
 # To better split a log
-#p = re.compile(
+# p = re.compile(
 #    '([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'
 #    )
 
-#for line in file.readlines():
+# for line in file.readlines():
 #    m = p.match(line)
 #    if not m:
-#        continue
+#       continue
 #    host, ignore, user, date, request, status, size = m.groups()
 
 
